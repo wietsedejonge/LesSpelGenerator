@@ -157,7 +157,7 @@ function collectAndSubmitData() {
         timePeriod: timePeriod
     };
 
-    fetch("http://127.0.0.1:5000/generate", {
+    fetch("https://flask-game-generator.onrender.com/generate", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
