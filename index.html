@@ -151,7 +151,7 @@
             const numPeople = document.getElementById('numPeople').value;
             const timePeriod = document.getElementById('timePeriod').value;
         
-            const prompt = `Generate a game idea for the subject ${subject}, for ${numPeople} people, with a time duration of ${timePeriod}.`;
+            const prompt = `Genereer een spel voor in een les voor groep 5-8 over onderwerp ${subject}, voor ${numPeople} kinderen, met een duur van ${timePeriod}.`;
         
             fetch("https://flask-game-generator.onrender.com/generate", {
                 method: "POST",
