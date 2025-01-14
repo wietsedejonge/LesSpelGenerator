@@ -10,6 +10,7 @@
 </head>
 <body>
 
+ <!-- Navbar -->
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Spelgenerator voor Leerkrachten</a>
@@ -25,7 +26,7 @@
             <a class="nav-link" href="#section-2">Over</a>
             </li>
             <li class="nav-item nav-item-3">
-            <a class="nav-link" href="#section-3">Spel Generator</a>
+            <a class="nav-link" href="#section-3">Wereldoriëntatie Spel Generator</a>
             </li>
             <li class="nav-item nav-item-4">
             <a class="nav-link" href="#section-4">Contact</a>
@@ -101,11 +102,6 @@
     </div>
   </div>
 
-
-
-
-
-
   <div class="container-fluid custom-section-4" id="section-4">
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-6 text-center">
@@ -132,25 +128,17 @@
     </div>
   </div>
 
-
-
-
-  
-
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
     <script>
 function showNextQuestion(currentQuestionId, nextQuestionId) {
     const currentQuestion = document.getElementById(currentQuestionId);
-    const nextQuestion = document.getElementById(nextQuestionId);
-
     currentQuestion.classList.remove('visible');
 
     setTimeout(function () {
         currentQuestion.style.display = "none";
-
-        // Now, fade in the next question
+        const nextQuestion = document.getElementById(nextQuestionId);
         nextQuestion.style.display = "block";
         setTimeout(function () {
             nextQuestion.classList.add('visible');
@@ -158,7 +146,35 @@ function showNextQuestion(currentQuestionId, nextQuestionId) {
     }, 1500);
 }
 
-// Event listeners for the 'Next' buttons
+function collectAndSubmitData() {
+    const subject = document.getElementById('subject').value;
+    const numPeople = document.getElementById('numPeople').value;
+    const timePeriod = document.getElementById('timePeriod').value;
+
+    const formData = {
+        prompt: `Maak een spelidee voor het vak ${subject} voor ${numPeople} personen. De tijdsduur is ${timePeriod}.`
+    };
+
+    fetch('https://flask-game-generator.onrender.com/generate', {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        const generatedText = data.generated_text;
+        document.getElementById('responseMessage').innerHTML = `
+            <h3>Genereerde Spel Ideeën:</h3>
+            <pre>${generatedText}</pre>
+        `;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('responseMessage').innerHTML = `<p>Error generating ideas. Please try again.</p>`;
+    });
+}
+
 document.getElementById('next1').addEventListener('click', function () {
     showNextQuestion('question1', 'question2');
 });
@@ -167,44 +183,13 @@ document.getElementById('next2').addEventListener('click', function () {
     showNextQuestion('question2', 'question3');
 });
 
-document.getElementById('submit').addEventListener('click', collectAndSubmitData);
-
-function collectAndSubmitData(event) {
-    event.preventDefault();
-
-    const subject = document.getElementById('subject').value;
-    const numPeople = document.getElementById('numPeople').value;
-    const timePeriod = document.getElementById('timePeriod').value;
-
-    const formData = {
-        subject: subject,
-        numPeople: numPeople,
-        timePeriod: timePeriod,
-    };
-
-    fetch('http://localhost:3000/generate-lesson-ideas', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-    })
-    .then(response => response.json())
-    .then(data => {
-        const lessonIdeas = data.lessonIdeas;
-        document.getElementById('responseMessage').innerHTML = `<p>Les ideeen:</p><pre>${lessonIdeas}</pre>`;
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('responseMessage').innerHTML = '<p>Mislukt.</p>';
-    });
-}
+document.getElementById('submit').addEventListener('click', function () {
+    collectAndSubmitData();
+});
 
 
 
-
-        </script>
-        
+    </script>
     
     
 </body>

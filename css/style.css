@@ -94,12 +94,12 @@ body {
 
 .box {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    justify-content: flex-start; /* Ensure content is at the top initially */
+    align-items: center;
     height: 75vh;
     width: 100%;
     text-align: center;
@@ -107,19 +107,17 @@ body {
 }
 
 .question {
+    width: 100%;
+    max-width: 600px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 3s ease, visibility 3s ease;
 }
 
 .question.visible {
     opacity: 1;
     visibility: visible;
 }
-
-
-
-
 
 select {
     width: 100%;
@@ -129,7 +127,7 @@ select {
 
 button {
     margin-top: auto;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Ensure space at the bottom of the box */
     width: auto;
 }
 
@@ -144,49 +142,12 @@ h4 {
     color: #333;
 }
 
-.custom-section-4 .row {
-    height: 100vh;
-}
-
-.custom-section-4 .col-md-6 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-input, textarea, select {
-    width: 100%;
-    margin-bottom: 15px;
-    max-width: 400px;
-}
-
-button {
-    width: auto;
-    margin-top: 20px;
-}
-
-
-
 
 
 
 
 .custom-section-4 {
-    background-color: rgba(232, 50, 183, 0.4);
+    background-color: rgba(232, 50, 183, 0.4); /* Slightly brighter pinkish-purple */
     height: 100vh;
 }
 
