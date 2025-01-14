@@ -132,64 +132,67 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script>
-function showNextQuestion(currentQuestionId, nextQuestionId) {
-    const currentQuestion = document.getElementById(currentQuestionId);
-    currentQuestion.classList.remove('visible');
-
-    setTimeout(function () {
-        currentQuestion.style.display = "none";
-        const nextQuestion = document.getElementById(nextQuestionId);
-        nextQuestion.style.display = "block";
-        setTimeout(function () {
-            nextQuestion.classList.add('visible');
-        }, 10);
-    }, 1500);
-}
-
-function collectAndSubmitData() {
-    const subject = document.getElementById('subject').value;
-    const numPeople = document.getElementById('numPeople').value;
-    const timePeriod = document.getElementById('timePeriod').value;
-
-    const formData = {
-        subject: subject,
-        numPeople: numPeople,
-        timePeriod: timePeriod
-    };
-
-    fetch("https://flask-game-generator.onrender.com/generate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('responseMessage').innerHTML = `<p>Lesidee:</p>
-                                                                <pre>${JSON.stringify(data, null, 2)}</pre>`;
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
-}
-
-
-document.getElementById('next1').addEventListener('click', function () {
-    showNextQuestion('question1', 'question2');
-});
-
-document.getElementById('next2').addEventListener('click', function () {
-    showNextQuestion('question2', 'question3');
-});
-
-document.getElementById('submit').addEventListener('click', function () {
-    collectAndSubmitData();
-});
-
-
-
-    </script>
+        function showNextQuestion(currentQuestionId, nextQuestionId) {
+            const currentQuestion = document.getElementById(currentQuestionId);
+            currentQuestion.classList.remove('visible');
+        
+            setTimeout(function () {
+                currentQuestion.style.display = "none";
+                const nextQuestion = document.getElementById(nextQuestionId);
+                nextQuestion.style.display = "block";
+                setTimeout(function () {
+                    nextQuestion.classList.add('visible');
+                }, 10);
+            }, 1500);
+        }
+        
+        function collectAndSubmitData() {
+            const subject = document.getElementById('subject').value;
+            const numPeople = document.getElementById('numPeople').value;
+            const timePeriod = document.getElementById('timePeriod').value;
+        
+            const prompt = `Generate a game idea for the subject ${subject}, for ${numPeople} people, with a time duration of ${timePeriod}.`;
+        
+            fetch("https://flask-game-generator.onrender.com/generate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ prompt: prompt })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const generatedText = data.generated_text || "No response generated.";
+                document.getElementById('responseMessage').innerHTML = `
+                    <h3>Lesidee:</h3>
+                    <p><strong>Onderwerp:</strong> ${subject}</p>
+                    <p><strong>Aantal personen:</strong> ${numPeople}</p>
+                    <p><strong>Tijdsduur:</strong> ${timePeriod}</p>
+                    <p><strong>Spelidee:</strong></p>
+                    <pre>${generatedText}</pre>
+                `;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById('responseMessage').innerHTML = `
+                    <p style="color: red;">Er is iets misgegaan. Probeer het opnieuw.</p>
+                `;
+            });
+        }
+        
+        document.getElementById('next1').addEventListener('click', function () {
+            showNextQuestion('question1', 'question2');
+        });
+        
+        document.getElementById('next2').addEventListener('click', function () {
+            showNextQuestion('question2', 'question3');
+        });
+        
+        document.getElementById('submit').addEventListener('click', function () {
+            collectAndSubmitData();
+        });
+        </script>
+        
     
     
 </body>
