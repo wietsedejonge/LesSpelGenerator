@@ -152,28 +152,28 @@ function collectAndSubmitData() {
     const timePeriod = document.getElementById('timePeriod').value;
 
     const formData = {
-        prompt: `Maak een spelidee voor het vak ${subject} voor ${numPeople} personen. De tijdsduur is ${timePeriod}.`
+        subject: subject,
+        numPeople: numPeople,
+        timePeriod: timePeriod
     };
 
-    fetch('https://flask-game-generator.onrender.com/generate', {
+    fetch("http://127.0.0.1:5000/generate", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
     })
     .then(response => response.json())
     .then(data => {
-        const generatedText = data.generated_text;
-        document.getElementById('responseMessage').innerHTML = `
-            <h3>Genereerde Spel Ideeën:</h3>
-            <pre>${generatedText}</pre>
-        `;
+        document.getElementById('responseMessage').innerHTML = `<p>Lesidee:</p>
+                                                                <pre>${JSON.stringify(data, null, 2)}</pre>`;
     })
     .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('responseMessage').innerHTML = `<p>Error generating ideas. Please try again.</p>`;
+        console.error("Error:", error);
     });
 }
+
 
 document.getElementById('next1').addEventListener('click', function () {
     showNextQuestion('question1', 'question2');
