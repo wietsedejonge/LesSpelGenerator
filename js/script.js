@@ -220,7 +220,7 @@ responseDiv.innerHTML = `
 `;
 responseDiv.style.display = "block";
 
-fetch("https://flask-game-generator.onrender.com/", {
+fetch("", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -286,7 +286,7 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
     `;
     responseDiv.style.display = "block";
 
-    fetch("https://flask-game-generator.onrender.com/", {
+    fetch("", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
