@@ -109,7 +109,7 @@ body {
     max-width: 600px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 3s ease, visibility 3s ease;
+    transition: opacity 1s ease, visibility 1s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -239,6 +239,18 @@ footer {
     color: #aaa;
     margin-top: 8px;
     }
+
+    .custom-section,
+    .custom-section-2,
+    .custom-section-3,
+    .custom-section-4 {
+        position: relative;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05),
+                    0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    
+    
 
 /* MEDIA QUERIES */
 
