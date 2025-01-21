@@ -311,7 +311,7 @@ margin-top: 8px;
     }
 
     .info-item, .info-row {
-        display:none;
+        display:none !important;
     }
 
     .question {
