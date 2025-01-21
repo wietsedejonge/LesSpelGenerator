@@ -377,3 +377,18 @@ document.getElementById('next4').addEventListener('click', function () {
 document.getElementById('submitFinal').addEventListener('click', function () {
     collectAndSubmitData();
 });
+
+function sendEmail() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var message = document.getElementById("message").value;
+    
+    var subject = "Nieuw Bericht van " + encodeURIComponent(name);
+    var body = "Naam: " + encodeURIComponent(name) + "%0A" +
+               "Email: " + encodeURIComponent(email) + "%0A" +
+               "Bericht: " + encodeURIComponent(message);
+    
+    var mailtoLink = "mailto:email@komtnog.com?subject=" + subject + "&body=" + body;
+
+    window.location.href = mailtoLink;
+}

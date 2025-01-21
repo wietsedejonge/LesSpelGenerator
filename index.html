@@ -145,31 +145,31 @@
 </div>
 
 
-  <div class="container-fluid custom-section-4" id="contact">
+<div class="container-fluid custom-section-4" id="contact">
     <div class="row justify-content-center align-items-center" style="height: 100vh;">
         <div class="col-md-6 text-center">
             <h2>Contact</h2>
         </div>
 
-        <div class="col-md-6 pr-5" style="padding-right: 50px;">
-            <form class="d-flex flex-column justify-content-center text-center">
+        <div class="col-md-6 pr-5" style="padding-right: 50px;" id="contact-column">
+            <form class="d-flex flex-column justify-content-center text-center" id="contactForm">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                    <label for="name" class="form-label"><b>Naam</b></label>
+                    <input type="text" class="form-control" id="name" placeholder="Uw naam...">
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                    <label for="email" class="form-label"><b>E-mail</b></label>
+                    <input type="email" class="form-control" id="email" placeholder="Uw e-mail...">
                 </div>
                 <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+                    <label for="message" class="form-label"><b>Bericht</b></label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Uw bericht..."></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-primary" onclick="sendEmail()">Verzend</button>
             </form>
         </div>
     </div>
-  </div>
+</div>
 
   <footer>
     <div class="copyright">
