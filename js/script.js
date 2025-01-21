@@ -272,7 +272,13 @@ fetch("https://flask-game-generator.onrender.com/generate", {
 document.getElementById('generateNewPrompt').addEventListener('click', function () {
     const { groups, timePeriod, subject, theme, question5Responses } = savedData;
 
-    const prompt = `Genereer een lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Max 150 woorden, focus op speluitleg.`;
+    const generateNewPromptButton = document.getElementById('generateNewPrompt');
+
+    generateNewPromptButton.disabled = true;
+    generateNewPromptButton.style.cursor = "not-allowed";
+    generateNewPromptButton.title = "Wacht even voordat je een nieuw spel genereert!";
+
+    const prompt = `Genereer een nieuw lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Anders dan eerdere ideeën. Max 150 woorden, focus op speluitleg.`;
 
     const responseDiv = document.getElementById('responseMessage');
 
@@ -318,12 +324,24 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
             </div>
         `;
         responseDiv.style.display = "block"; 
+
+        setTimeout(() => {
+            generateNewPromptButton.disabled = false;
+            generateNewPromptButton.style.cursor = "pointer";
+            generateNewPromptButton.title = "";
+        }, 5000);
     })
     .catch(error => {
         console.error("Error:", error);
         responseDiv.innerHTML = `
             <p style="color: red;">Er is iets misgegaan. Probeer het opnieuw.</p>
         `;
+
+        setTimeout(() => {
+            generateNewPromptButton.disabled = false;
+            generateNewPromptButton.style.cursor = "pointer";
+            generateNewPromptButton.title = "";
+        }, 5000);
     });
 });
 
