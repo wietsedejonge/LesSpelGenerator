@@ -110,6 +110,24 @@ subjects.forEach((subject, index) => {
     onderwerpContainer.appendChild(document.createElement('br'));
 });
 
+// "Anders... chexkbox"
+const andersLabel = document.createElement('label');
+andersLabel.innerHTML = `<input type="checkbox" id="onderwerpAnders"> Anders...`;
+onderwerpContainer.appendChild(andersLabel);
+
+const andersInput = document.createElement('input');
+andersInput.type = 'text';
+andersInput.id = 'onderwerpAndersInput';
+andersInput.maxLength = 100;
+andersInput.placeholder = 'Vul je eigen onderwerp in...';
+andersInput.style.display = 'none';
+andersInput.classList.add('anders-input');
+onderwerpContainer.appendChild(andersInput);
+
+document.getElementById('onderwerpAnders').addEventListener('change', function () {
+    andersInput.style.display = this.checked ? 'block' : 'none';
+});
+
 toggleNextButtonForSubjects();
 }
 
@@ -197,17 +215,31 @@ if (onderwerpContainer) {
         selectedCheckboxes.forEach(checkbox => {
             const labelElement = checkbox.closest('label');
             if (labelElement) {
-                question5Responses.push(labelElement.textContent.trim());
+                let selectedText = labelElement.textContent.trim();
+
+                if (selectedText !== "Anders...") {
+                    question5Responses.push(selectedText);
+                }
             }
         });
     } else {
         console.log('No onderwerpen selected.');
+    }
+
+    const andersCheckbox = document.getElementById('onderwerpAnders');
+    const andersInput = document.getElementById('onderwerpAndersInput');
+
+    if (andersCheckbox.checked && andersInput.value.trim() !== '') {
+        question5Responses.push(andersInput.value.trim());
     }
 }
 
 savedData = { groups, timePeriod, subject, theme, question5Responses };
 
 const prompt = `Genereer een lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Max 150 woorden, focus op speluitleg.`;
+
+console.log("Prompt being sent:", prompt);
+console.log("Saved Data:", savedData);
 
 const responseDiv = document.getElementById('responseMessage');
 
@@ -220,7 +252,7 @@ responseDiv.innerHTML = `
 `;
 responseDiv.style.display = "block";
 
-fetch("", {
+fetch("https://flask-game-generator.onrender.com/generate", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -291,7 +323,7 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
     `;
     responseDiv.style.display = "block";
 
-    fetch("", {
+    fetch("https://flask-game-generator.onrender.com/generate", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -251,6 +251,19 @@ margin-top: 8px;
 .form-control {
     text-align:center
 }
+
+.anders-input {
+    width: 50%;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+    text-align: center;
+}
     
     
     
@@ -349,6 +362,11 @@ margin-top: 8px;
         padding-right:0px !important;
         margin:auto;
     }
+
+    .anders-input {
+        width: 75% !important;
+        font-size: 11px !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -420,5 +438,10 @@ margin-top: 8px;
     #contact-column {
         padding-right:0px !important;
         margin:auto;
+    }
+
+    .anders-input {
+        width: 75% !important;
+        font-size: 11px !important;
     }
 }
