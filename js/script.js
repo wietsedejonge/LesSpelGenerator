@@ -238,9 +238,6 @@ savedData = { groups, timePeriod, subject, theme, question5Responses };
 
 const prompt = `Genereer een lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Max 150 woorden, focus op speluitleg.`;
 
-console.log("Prompt being sent:", prompt);
-console.log("Saved Data:", savedData);
-
 const responseDiv = document.getElementById('responseMessage');
 
 responseDiv.innerHTML = `
@@ -252,7 +249,7 @@ responseDiv.innerHTML = `
 `;
 responseDiv.style.display = "block";
 
-fetch("https://flask-game-generator.onrender.com/generate", {
+fetch("", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -323,7 +320,7 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
     `;
     responseDiv.style.display = "block";
 
-    fetch("https://flask-game-generator.onrender.com/generate", {
+    fetch("", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
