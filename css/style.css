@@ -8,6 +8,10 @@ body {
     font-weight:500 !important;
   }
 
+#home h2.text-center, h6.text-center {
+    font-family: 'Merriweather', serif;
+}
+
 .navbar-nav{
     margin-left:auto;
 }
@@ -474,10 +478,6 @@ footer {
         font-size:9px;
     }
 
-    .decoratieFoto img {
-        display:none;
-    }
-
 }
 
 @media (max-width: 480px) {
@@ -501,6 +501,10 @@ footer {
 
     h2 {
         font-size: 1.5rem;
+    }
+
+    h6 {
+        font-size: 0.8rem;
     }
 
     .nav-item {
