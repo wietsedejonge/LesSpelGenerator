@@ -306,6 +306,9 @@ function populateSubjects(theme) {
     
     document.getElementById('onderwerpAnders').addEventListener('change', function () {
         andersInput.style.display = this.checked ? 'block' : 'none';
+        if (this.checked) {
+            onderwerpContainer.scrollTop = onderwerpContainer.scrollHeight;
+        }
     });
     
     toggleNextButtonForSubjects();

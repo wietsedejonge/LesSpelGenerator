@@ -189,7 +189,7 @@ fetch("https://flask-game-generator.onrender.com/generate", {
 
         const generateNewPromptButton = document.getElementById('generateNewPrompt');
         generateNewPromptButton.style.display = 'block';
-    }, 1500);
+    }, 3000);
 })
 .catch(error => {
     console.error("Error:", error);
