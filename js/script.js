@@ -97,11 +97,8 @@ if (!themeElement) {
 const question4 = document.getElementById('question4');
 const question5 = document.getElementById('question5');
 question4.classList.remove('visible');
-setTimeout(function () {
-    question4.style.display = "none";
-    question5.style.display = "block";
-    question5.classList.add('visible');
-}, 1500);
+question4.style.display = "none";
+question5.style.display = "none";
 
 const onderwerpContainer = document.getElementById('onderwerpContainer');
 let question5Responses = [];

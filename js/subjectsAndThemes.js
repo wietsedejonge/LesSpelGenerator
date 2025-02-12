@@ -157,7 +157,7 @@ function populateSubjects(theme) {
                     'Maria van Bourgondië (1457-1482)'
                 ];
                 break;
-            case 'Tijdvak 5: tijd van ontdekkers en hervormers – renaissance/reformatie/ontdekkingsreizen (Nieuwe geschiedenis 1500-1600)':
+            case 'Tijdvak 5: tijd van ontdekkers en hervormers – renaissance/reformatie (Nieuwe geschiedenis 1500-1600)':
                 subjects = [
                     'Erasmus (± 1469-1536)',
                     'Karel V (1500-1558)',
