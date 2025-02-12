@@ -140,6 +140,7 @@ console.log(prompt, savedData);
 
 const responseDiv = document.getElementById('responseMessage');
 
+question5.style.display = "none";
 responseDiv.innerHTML = `
     <div class="spinner-container">
         <div class="spinner-border text-primary" role="status">
