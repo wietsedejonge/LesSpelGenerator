@@ -161,35 +161,31 @@ fetch("https://flask-game-generator.onrender.com/generate", {
 .then(data => {
     const generatedText = data.generated_text || "No response generated.";
 
-    question5.classList.remove('visible');
-    setTimeout(function () {
-        question5.style.display = "none";
-        responseDiv.innerHTML = `
-            <h3 class="text-center mb-2">Lesidee:</h3>
-            <p>${generatedText}</p>
-            <div class="info-row">
-                <div class="info-item">
-                    <strong>Vak:</strong> ${subject}
-                </div>
-                <div class="info-item">
-                    <strong>Groep:</strong> ${groups.join(', ') || 'Niet geselecteerd'}
-                </div>
-                <div class="info-item">
-                    <strong>Tijdsduur:</strong> ${timePeriod}
-                </div>
-                <div class="info-item">
-                    <strong>Thema:</strong> ${theme}
-                </div>
-                <div class="info-item">
-                <p><strong>Onderwerpen:</strong> ${question5Responses.join(', ') || 'Niet geselecteerd'}</p>
-                </div>
+    responseDiv.innerHTML = `
+        <h3 class="text-center mb-2">Lesidee:</h3>
+        <p>${generatedText}</p>
+        <div class="info-row">
+            <div class="info-item">
+                <strong>Vak:</strong> ${subject}
             </div>
-        `;
-        responseDiv.style.display = "block"; 
+            <div class="info-item">
+                <strong>Groep:</strong> ${groups.join(', ') || 'Niet geselecteerd'}
+            </div>
+            <div class="info-item">
+                <strong>Tijdsduur:</strong> ${timePeriod}
+            </div>
+            <div class="info-item">
+                <strong>Thema:</strong> ${theme}
+            </div>
+            <div class="info-item">
+                <p><strong>Onderwerpen:</strong> ${question5Responses.join(', ') || 'Niet geselecteerd'}</p>
+            </div>
+        </div>
+    `;
+    responseDiv.style.display = "block"; 
 
-        const generateNewPromptButton = document.getElementById('generateNewPrompt');
-        generateNewPromptButton.style.display = 'block';
-    }, 10000);
+    const generateNewPromptButton = document.getElementById('generateNewPrompt');
+    generateNewPromptButton.style.display = 'block';
 })
 .catch(error => {
     console.error("Error:", error);
