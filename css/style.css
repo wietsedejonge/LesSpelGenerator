@@ -226,6 +226,7 @@ h4 {
 }
 
 #responseMessage {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -239,6 +240,19 @@ h4 {
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.2) rgba(255, 255, 255, 0.9);
     box-sizing: border-box;
+}
+
+.spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
 }
 
 #responseMessage .content {

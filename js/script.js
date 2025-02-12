@@ -141,7 +141,7 @@ console.log(prompt, savedData);
 const responseDiv = document.getElementById('responseMessage');
 
 responseDiv.innerHTML = `
-    <div class="d-flex justify-content-center">
+    <div class="spinner-container">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
@@ -212,7 +212,7 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
     const responseDiv = document.getElementById('responseMessage');
 
     responseDiv.innerHTML = `
-        <div class="d-flex justify-content-center">
+        <div class="spinner-container">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
