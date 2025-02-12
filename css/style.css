@@ -429,8 +429,12 @@ footer {
         display:none !important;
     }
 
-    #overOns {
+    #overOns ,#downloadProfielwerkstuk {
         font-size:10px;
+    }
+
+    #downloadProfielwerkstuk {
+        margin-bottom:10px;
     }
 
     .question {
