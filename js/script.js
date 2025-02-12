@@ -17,63 +17,6 @@ toggleNextButton('question3', 'next3');
 toggleNextButton('question4', 'next4');
 toggleNextButton('question5', 'submitFinal');
 
-    function populateThemes(subject) {
-    const themaContainer = document.getElementById('themaContainer');
-    themaContainer.innerHTML = '';
-
-    let themes = [];
-    if (subject === 'Aardrijkskunde') {
-        themes = [
-            'Geografie van Europa'
-            // 'Klimaatverandering',
-            // 'Wereldzeeën',
-            // 'Steden en hun geschiedenis',
-            // 'Natuurverschijnselen'
-        ];
-    } else if (subject === 'Geschiedenis') {
-        themes = [
-            'De Tweede Wereldoorlog'
-            // 'Romeinse Rijk',
-            // 'De Middeleeuwen',
-            // 'De Franse Revolutie',
-            // 'De Gouden Eeuw'
-        ];
-    } else if (subject === 'Natuurkunde') {
-        themes = [
-            'Beweging en Kracht'
-            // 'Energiebronnen',
-            // 'Magnetisme',
-            // 'Elektriciteit',
-            // 'Optica'
-        ];
-    } else if (subject === 'Biologie') {
-        themes = [
-            'Cellen en Organismen'
-            // 'Ecosystemen',
-            // 'Genetica',
-            // 'Planten en Dieren',
-            // 'Menselijk Lichaam'
-        ];
-    } else if (subject === 'Techniek') {
-        themes = [
-            'Robots en Automatisering'
-            // 'Circuits en Elektronica',
-            // 'Machines en Mechanica',
-            // '3D-printen',
-            // 'Herbruikbare Energie'
-        ];
-    }
-
-    themes.forEach((theme, index) => {
-        const label = document.createElement('label');
-        label.innerHTML = `<input type="radio" name="thema" id="thema${index}" value="${theme}"> ${theme}`;
-        themaContainer.appendChild(label);
-        themaContainer.appendChild(document.createElement('br'));
-    });
-
-    toggleNextButtonForThemes();
-}
-
 function toggleNextButtonForThemes() {
     const themeInputs = document.querySelectorAll('#themaContainer input');
     const submitButton = document.getElementById('next4');
@@ -84,51 +27,6 @@ function toggleNextButtonForThemes() {
             submitButton.disabled = !isAnySelected;
         });
     });
-}
-
-function populateSubjects(theme) {
-const onderwerpContainer = document.getElementById('onderwerpContainer');
-onderwerpContainer.innerHTML = '';
-
-let subjects = [];
-if (theme === 'Geografie van Europa') {
-    subjects = ['Landkaarten', 'Bevolking', 'Rivieren', 'Bergen', 'Klimaat'];
-} else if (theme === 'Klimaatverandering') {
-    subjects = ['Oorzaken', 'Gevolgen', 'Oplossingen', 'Wetenschap', 'Verdragen'];
-} else if (theme === 'De Tweede Wereldoorlog') {
-    subjects = ['Belangrijke gebeurtenissen', 'Leiders', 'Slagvelden', 'Dagelijks leven', 'Gevolgen'];
-} else if (theme === 'Romeinse Rijk') {
-    subjects = ['Architectuur', 'Leger', 'Politiek', 'Dagelijks leven', 'Invloed op de wereld'];
-} else if (theme === 'Robots en Automatisering') {
-    subjects = ['Geschiedenis van robots', 'Gebruik in industrie', 'Robotica in het dagelijks leven', 'Ethiek', 'Toekomstige trends'];
-}
-
-subjects.forEach((subject, index) => {
-    const label = document.createElement('label');
-    label.innerHTML = `<input type="checkbox" name="onderwerp" id="onderwerp${index}" value="${subject}"> ${subject}`;
-    onderwerpContainer.appendChild(label);
-    onderwerpContainer.appendChild(document.createElement('br'));
-});
-
-// "Anders... chexkbox"
-const andersLabel = document.createElement('label');
-andersLabel.innerHTML = `<input type="checkbox" id="onderwerpAnders"> Anders...`;
-onderwerpContainer.appendChild(andersLabel);
-
-const andersInput = document.createElement('input');
-andersInput.type = 'text';
-andersInput.id = 'onderwerpAndersInput';
-andersInput.maxLength = 100;
-andersInput.placeholder = 'Vul je eigen onderwerp in...';
-andersInput.style.display = 'none';
-andersInput.classList.add('anders-input');
-onderwerpContainer.appendChild(andersInput);
-
-document.getElementById('onderwerpAnders').addEventListener('change', function () {
-    andersInput.style.display = this.checked ? 'block' : 'none';
-});
-
-toggleNextButtonForSubjects();
 }
 
 function toggleNextButtonForSubjects() {
@@ -238,6 +136,8 @@ savedData = { groups, timePeriod, subject, theme, question5Responses };
 
 const prompt = `Genereer een lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Max 150 woorden, focus op speluitleg.`;
 
+console.log(prompt, savedData);
+
 const responseDiv = document.getElementById('responseMessage');
 
 responseDiv.innerHTML = `
@@ -249,7 +149,7 @@ responseDiv.innerHTML = `
 `;
 responseDiv.style.display = "block";
 
-fetch("", {
+fetch("https://flask-game-generator.onrender.com/generate", {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -320,7 +220,7 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
     `;
     responseDiv.style.display = "block";
 
-    fetch("", {
+    fetch("https://flask-game-generator.onrender.com/generate", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -417,7 +317,7 @@ function sendEmail() {
                "Email: " + encodeURIComponent(email) + "%0A" +
                "Bericht: " + encodeURIComponent(message);
     
-    var mailtoLink = "mailto:email@komtnog.com?subject=" + subject + "&body=" + body;
+    var mailtoLink = "mailto:Karlijnnijboer5@gmail.com?subject=" + subject + "&body=" + body;
 
     window.location.href = mailtoLink;
 }
