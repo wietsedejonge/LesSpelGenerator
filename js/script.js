@@ -161,6 +161,9 @@ fetch("https://flask-game-generator.onrender.com/generate", {
 .then(data => {
     const generatedText = data.generated_text || "No response generated.";
 
+    question5.classList.remove('visible');
+    question5.style.display = "none";
+
     responseDiv.innerHTML = `
         <h3 class="text-center mb-2">Lesidee:</h3>
         <p>${generatedText}</p>
