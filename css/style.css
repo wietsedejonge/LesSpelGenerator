@@ -100,7 +100,7 @@ body {
 .image img {
     border-radius: 20px !important;
     box-shadow: 0 40px 20px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    width: 75%;
     margin-left: 150px;
 }
 
@@ -229,6 +229,7 @@ button {
     margin-top: auto;
     margin-bottom: 20px;
     width: auto;
+    border: 2px solid rgba(0, 0, 0, 0.1) !important;
 }
 
 h4 {
@@ -369,6 +370,7 @@ footer {
 }
 
 #downloadProfielwerkstuk {
+    font-size: 15px;
     margin-top:-10px;
     box-sizing: border-box;
 }
@@ -377,7 +379,11 @@ footer {
     text-decoration: underline;
     color: #212529;
 }
-    
+
+#downloadProfielwerkstuk a:hover {
+    opacity: 0.6;
+    transform: scale(1.05);
+}
     
     
 
