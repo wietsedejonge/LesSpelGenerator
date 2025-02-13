@@ -19,12 +19,12 @@ body {
 .nav-item{
     background-color:rgba(245, 207, 117, 0.5) !important;
     border-radius: 30px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
     justify-content: space-around !important;
     margin-left: 20px !important;
     transition: background-color 0.3s ease;
     padding: 0px 30px;
-    height:40px;
-
+    height:40px;    
 }
 
 .nav-item-1 {
@@ -74,7 +74,7 @@ body {
 
 .custom-section-2 {
     background-color: rgba(67, 242, 160, 0.4);
-    height: 100vh;
+    height: 105vh;
 }
 
 .custom-section-3 {
@@ -83,11 +83,12 @@ body {
 }
 
 .section-3-paragraph{
-    width:40%;
+    width:50%;
 }
 
 #overOns {
-    font-size:16px;
+    font-size:15px;
+    line-height: 1.4 !important;
 }
 
 .decoratieFoto img {
@@ -366,6 +367,16 @@ footer {
     transition: border 0.3s ease;
     text-align: center;
 }
+
+#downloadProfielwerkstuk {
+    margin-top:-10px;
+    box-sizing: border-box;
+}
+
+#downloadProfielwerkstuk a {
+    text-decoration: underline;
+    color: #212529;
+}
     
     
     
@@ -411,6 +422,7 @@ footer {
     .image img {
         width: 100%;
         margin-left: 0;
+        margin-top: 10px;
         border-radius: 10px;
         box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
     }
@@ -431,10 +443,6 @@ footer {
 
     #overOns ,#downloadProfielwerkstuk {
         font-size:10px;
-    }
-
-    #downloadProfielwerkstuk {
-        margin-bottom:10px;
     }
 
     .question {
