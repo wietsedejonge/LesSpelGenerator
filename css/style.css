@@ -68,17 +68,22 @@ body {
 }
 
 .custom-section {
-    background-color: rgba(245, 207, 117, 0.5);
+    background: linear-gradient(to bottom, rgba(245, 207, 117, 0.5), rgba(245, 207, 117, 0.6));
     height: 100vh;
 }
 
 .custom-section-2 {
-    background-color: rgba(67, 242, 160, 0.4);
+    background: linear-gradient(to bottom, rgba(67, 242, 160, 0.4), rgba(67, 242, 160, 0.5));
     height: 105vh;
 }
 
 .custom-section-3 {
-    background-color: rgba(96, 134, 239, 0.4);
+    background: linear-gradient(to bottom, rgba(96, 134, 239, 0.4), rgba(96, 134, 239, 0.5));
+    height: 100vh;
+}
+
+.custom-section-4 {
+    background: linear-gradient(to bottom, rgba(232, 50, 183, 0.4), rgba(232, 50, 183, 0.5));
     height: 100vh;
 }
 
@@ -323,11 +328,6 @@ h4 {
     background: rgba(255, 255, 255, 0.9);
 }
 
-.custom-section-4 {
-    background-color: rgba(232, 50, 183, 0.4);
-    height: 100vh;
-}
-
 .row {
     width: 100%;
     height: 100%;
@@ -415,7 +415,7 @@ footer {
         margin:auto;
     }
 
-    .custom-section, .custom-section-2, .custom-section-3, .custom-section-4 {
+    .custom-section-2, .custom-section-3, .custom-section-4 {
         height: auto;
         padding: 20px;
     }
