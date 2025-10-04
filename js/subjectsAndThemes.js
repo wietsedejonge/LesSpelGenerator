@@ -51,7 +51,9 @@ function populateThemes(subject) {
         themaContainer.appendChild(document.createElement('br'));
     });
 
-    toggleNextButtonForThemes();
+    toggleNextButton('question4', 'next4');
+
+    // toggleNextButtonForThemes();
 }
 
 function populateSubjects(theme) {
@@ -311,5 +313,6 @@ function populateSubjects(theme) {
         }
     });
     
-    toggleNextButtonForSubjects();
+    // toggleNextButtonForSubjects();
+    toggleNextButton('question5', 'submitFinal');
     }

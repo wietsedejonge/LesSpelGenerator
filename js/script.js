@@ -14,32 +14,6 @@ function toggleNextButton(questionId, buttonId) {
 toggleNextButton('question1', 'next1');
 toggleNextButton('question2', 'next2');
 toggleNextButton('question3', 'next3');
-toggleNextButton('question4', 'next4');
-toggleNextButton('question5', 'submitFinal');
-
-function toggleNextButtonForThemes() {
-    const themeInputs = document.querySelectorAll('#themaContainer input');
-    const submitButton = document.getElementById('next4');
-
-    themeInputs.forEach(input => {
-        input.addEventListener('change', function () {
-            const isAnySelected = Array.from(themeInputs).some(input => input.checked);
-            submitButton.disabled = !isAnySelected;
-        });
-    });
-}
-
-function toggleNextButtonForSubjects() {
-    const subjectInputs = document.querySelectorAll('#onderwerpContainer input');
-    const submitButton = document.getElementById('submitFinal');
-
-    subjectInputs.forEach(input => {
-        input.addEventListener('change', function () {
-            const isAnySelected = Array.from(subjectInputs).some(input => input.checked);
-            submitButton.disabled = !isAnySelected;
-        });
-    });
-}
 
 function showNextQuestion(currentQuestionId, nextQuestionId) {
     const currentQuestion = document.getElementById(currentQuestionId);
@@ -52,10 +26,8 @@ function showNextQuestion(currentQuestionId, nextQuestionId) {
         setTimeout(function () {
             nextQuestion.classList.add('visible');
         }, 10);
-    }, 1500);
+    }, 500);
 }
-
-let savedData = {};
 
 function collectAndSubmitData() {
 const groups = [];
@@ -67,12 +39,10 @@ const timePeriod = timePeriodElement
 
 if (document.getElementById('group3-4').checked) {
     groups.push('3-4');
-}
-if (document.getElementById('group5-6').checked) {
-    groups.push('5-6');
-}
-if (document.getElementById('group7-8').checked) {
-    groups.push('7-8');
+} else if(document.getElementById('group5-6').checked){
+    groups.push('5-6'); 
+} else if (document.getElementById('group7-8').checked){
+        groups.push('7-8');
 }
 
 const subjectElement = document.querySelector('input[name="subject"]:checked');
@@ -129,11 +99,9 @@ if (onderwerpContainer) {
     }
 }
 
-savedData = { groups, timePeriod, subject, theme, question5Responses };
-
 const prompt = `Genereer een lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Max 150 woorden, focus op speluitleg.`;
 
-console.log(prompt, savedData);
+console.log("prompt debug: " + prompt);
 
 const responseDiv = document.getElementById('responseMessage');
 
@@ -147,76 +115,12 @@ responseDiv.innerHTML = `
 `;
 responseDiv.style.display = "block";
 
-fetch("https://flask-game-generator.onrender.com/generate", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ prompt: prompt })
-})
-.then(response => response.json())
-.then(data => {
-    const generatedText = data.generated_text || "No response generated.";
+fetchResponse(prompt);
 
-    question5.classList.remove('visible');
-    question5.style.display = "none";
 
-    responseDiv.innerHTML = `
-        <h3 class="text-center mb-2">Lesidee:</h3>
-        <p>${generatedText}</p>
-        <div class="info-row">
-            <div class="info-item">
-                <strong>Vak:</strong> ${subject}
-            </div>
-            <div class="info-item">
-                <strong>Groep:</strong> ${groups.join(', ') || 'Niet geselecteerd'}
-            </div>
-            <div class="info-item">
-                <strong>Tijdsduur:</strong> ${timePeriod}
-            </div>
-            <div class="info-item">
-                <strong>Thema:</strong> ${theme}
-            </div>
-            <div class="info-item">
-                <p><strong>Onderwerpen:</strong> ${question5Responses.join(', ') || 'Niet geselecteerd'}</p>
-            </div>
-        </div>
-    `;
-    responseDiv.style.display = "block"; 
-
-    const generateNewPromptButton = document.getElementById('generateNewPrompt');
-    generateNewPromptButton.style.display = 'block';
-})
-.catch(error => {
-    console.error("Error:", error);
-    responseDiv.innerHTML = `
-        <p style="color: red;">Er is iets misgegaan. Probeer het opnieuw.</p>
-    `;
-});
 }
 
-document.getElementById('generateNewPrompt').addEventListener('click', function () {
-    const { groups, timePeriod, subject, theme, question5Responses } = savedData;
-
-    const generateNewPromptButton = document.getElementById('generateNewPrompt');
-
-    generateNewPromptButton.disabled = true;
-    generateNewPromptButton.style.cursor = "not-allowed";
-    generateNewPromptButton.title = "Wacht even voordat je een nieuw spel genereert!";
-
-    const prompt = `Genereer een nieuw lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Anders dan eerdere ideeën. Max 150 woorden, focus op speluitleg.`;
-
-    const responseDiv = document.getElementById('responseMessage');
-
-    responseDiv.innerHTML = `
-        <div class="spinner-container">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-    `;
-    responseDiv.style.display = "block";
-
+function fetchResponse(prompt){
     fetch("https://flask-game-generator.onrender.com/generate", {
         method: "POST",
         headers: {
@@ -227,6 +131,9 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
     .then(response => response.json())
     .then(data => {
         const generatedText = data.generated_text || "No response generated.";
+
+        question5.classList.remove('visible');
+        question5.style.display = "none";
 
         responseDiv.innerHTML = `
             <h3 class="text-center mb-2">Lesidee:</h3>
@@ -245,11 +152,14 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
                     <strong>Thema:</strong> ${theme}
                 </div>
                 <div class="info-item">
-                    <strong>Onderwerpen:</strong> ${question5Responses.join(', ') || 'Niet geselecteerd'}
+                    <p><strong>Onderwerpen:</strong> ${question5Responses.join(', ') || 'Niet geselecteerd'}</p>
                 </div>
             </div>
         `;
         responseDiv.style.display = "block"; 
+
+        const generateNewPromptButton = document.getElementById('generateNewPrompt');
+        generateNewPromptButton.style.display = 'block';
 
         setTimeout(() => {
             generateNewPromptButton.disabled = false;
@@ -262,13 +172,30 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
         responseDiv.innerHTML = `
             <p style="color: red;">Er is iets misgegaan. Probeer het opnieuw.</p>
         `;
-
-        setTimeout(() => {
-            generateNewPromptButton.disabled = false;
-            generateNewPromptButton.style.cursor = "pointer";
-            generateNewPromptButton.title = "";
-        }, 5000);
     });
+    }
+
+
+document.getElementById('generateNewPrompt').addEventListener('click', function () {
+    const generateNewPromptButton = document.getElementById('generateNewPrompt');
+
+    generateNewPromptButton.disabled = true;
+    generateNewPromptButton.style.cursor = "not-allowed";
+    generateNewPromptButton.title = "Wacht even voordat je een nieuw spel genereert!";
+
+    const prompt = `Genereer een nieuw lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Anders dan eerdere ideeën. Max 150 woorden, focus op speluitleg.`;
+
+    fetchResponse(prompt);
+    const responseDiv = document.getElementById('responseMessage');
+
+    responseDiv.innerHTML = `
+        <div class="spinner-container">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    `;
+    responseDiv.style.display = "block";
 });
 
 
