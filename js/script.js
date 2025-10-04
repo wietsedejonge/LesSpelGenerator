@@ -1,3 +1,6 @@
+const responseDiv = document.getElementById('responseMessage');
+
+
 function toggleNextButton(questionId, buttonId) {
     const questionContainer = document.getElementById(questionId);
     const inputs = questionContainer.querySelectorAll('input[type="radio"], input[type="checkbox"]');
@@ -57,9 +60,7 @@ if (themeElement) {
     if (labelElement) {
         theme = labelElement.textContent.trim();
     }
-}
-
-if (!themeElement) {
+} else {
     console.log('No theme selected, skipping the response generation.');
     return;
 }
@@ -103,7 +104,6 @@ const prompt = `Genereer een lesspel voor groep ${groups.join(', ')}, vak ${subj
 
 console.log("prompt debug: " + prompt);
 
-const responseDiv = document.getElementById('responseMessage');
 
 question5.style.display = "none";
 responseDiv.innerHTML = `
@@ -186,7 +186,6 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
     const prompt = `Genereer een nieuw lesspel voor groep ${groups.join(', ')}, vak ${subject}, thema ${theme}, onderwerpen: ${question5Responses.join(', ')}, tijd: ${timePeriod}. Anders dan eerdere ideeën. Max 150 woorden, focus op speluitleg.`;
 
     fetchResponse(prompt);
-    const responseDiv = document.getElementById('responseMessage');
 
     responseDiv.innerHTML = `
         <div class="spinner-container">
