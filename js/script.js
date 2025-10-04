@@ -117,9 +117,6 @@ responseDiv.style.display = "block";
 
 fetchResponse(prompt);
 
-
-}
-
 function fetchResponse(prompt){
     fetch("https://flask-game-generator.onrender.com/generate", {
         method: "POST",
@@ -196,6 +193,7 @@ document.getElementById('generateNewPrompt').addEventListener('click', function 
     `;
     responseDiv.style.display = "block";
 });
+}
 
 
 document.getElementById('next1').addEventListener('click', function () {
